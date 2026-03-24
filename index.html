@@ -3,258 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Utby Snabb Bilservice | Premium Automotive</title>
+    <title>Utby Snabb | Elite Automotive Engineering</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Plus+Jakarta+Sans:wght@200;400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --gold: #DABD66;
-            --navy: #06080c;
-            --navy-light: #0d1117;
-            --white: #ffffff;
-            --gray: #8a8f98;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
+            --gold-glow: rgba(218, 189, 102, 0.4);
+            --black: #050608;
+            --card-bg: rgba(20, 22, 28, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* الأساسيات - منع الحركة الجانبية */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+        /* منع الترهل الجانبي وضبط الانسيابية */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         html, body { 
-            width: 100%;
-            overflow-x: hidden; /* القضاء على الحركة يميناً ويساراً */
-            background-color: var(--navy);
-            color: var(--white);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
+            width: 100%; overflow-x: hidden; background: var(--black); 
+            color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
         }
 
-        /* الهيدر المتطور */
+        /* أنيميشن الصور الحية */
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* الهيدر الزجاجي */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(6, 8, 12, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            background: rgba(5, 6, 8, 0.4); backdrop-filter: blur(25px);
+            padding: 20px 0; border-bottom: 1px solid var(--border);
         }
-        .nav-inner {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+        .nav-container {
+            max-width: 1300px; margin: 0 auto; padding: 0 25px;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-weight: 800; font-size: 1.2rem; color: #fff; text-decoration: none; letter-spacing: -1px; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.4rem; letter-spacing: -1px; }
         .logo span { color: var(--gold); }
 
-        /* قسم الهيرو (الواجهة الرئيسية) */
+        /* القسم الرئيسي - سينمائي */
         .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(6, 8, 12, 0.7), rgba(6, 8, 12, 0.9)), 
-                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2000&auto=format&fit=crop');
+            height: 100vh; width: 100%; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(5,6,8,0.2), var(--black)),
+                        url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2000&auto=format&fit=crop');
             background-size: cover; background-position: center;
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            padding: 0 20px;
+            animation: kenBurns 20s infinite ease-in-out;
+            z-index: -1;
         }
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 800; 
-            line-height: 1; margin-bottom: 20px; letter-spacing: -2px;
-        }
-        .hero-content p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; }
+        .hero-content { text-align: center; padding: 0 20px; z-index: 5; opacity: 0; transform: translateY(30px); animation: fadeInUp 1s forwards 0.5s; }
+        
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* الأزرار الاحترافية */
-        .btn {
-            padding: 16px 32px; border-radius: 50px; font-weight: 700;
-            text-decoration: none; display: inline-block; transition: 0.3s;
-            cursor: pointer; border: none; font-size: 0.9rem; text-transform: uppercase;
-        }
-        .btn-gold { background: var(--gold); color: var(--navy); }
-        .btn-outline { border: 1px solid var(--border); color: #fff; margin-left: 10px; }
-        .btn:active { transform: scale(0.95); }
+        .hero h1 { font-size: clamp(3rem, 12vw, 6rem); font-weight: 800; line-height: 0.85; letter-spacing: -4px; margin-bottom: 20px; }
+        .hero h1 span { color: var(--gold); text-shadow: 0 0 30px var(--gold-glow); }
 
-        /* محرك الحجز - واقعي جداً */
-        .booking-box {
-            max-width: 1000px; margin: -50px auto 50px; padding: 0 20px;
-            position: relative; z-index: 10;
+        /* الماسح الضوئي الذكي للحجز */
+        .scanner-section { margin-top: -100px; padding: 0 20px; position: relative; z-index: 10; }
+        .scanner-card {
+            max-width: 900px; margin: 0 auto; background: var(--card-bg);
+            backdrop-filter: blur(40px); border: 1px solid var(--border);
+            padding: 40px; border-radius: 4px; box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
-        .booking-card {
-            background: var(--navy-light); border: 1px solid var(--border);
-            padding: 30px; border-radius: 15px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-        .grid-inputs {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px; margin-bottom: 20px;
-        }
-        .input-item label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; }
-        .input-item input, .input-item select {
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-            padding: 15px; border-radius: 8px; color: #fff; font-size: 1rem;
-        }
-
-        /* لوحة السيارة السويدية */
+        .plate-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto 30px; }
         .plate-input {
-            border: 2px solid var(--gold) !important;
-            font-family: 'JetBrains Mono', monospace;
-            text-align: center; font-size: 1.5rem !important; font-weight: 800;
+            width: 100%; background: #fff; color: #000; border: none;
+            padding: 20px; font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem; font-weight: 700; text-align: center;
+            text-transform: uppercase; border-radius: 4px; letter-spacing: 5px;
         }
+        .scan-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gold); box-shadow: 0 0 20px var(--gold);
+            display: none; animation: scanning 2s infinite linear;
+        }
+        @keyframes scanning { 0% { top: 0; } 100% { top: 100%; } }
 
-        /* الخدمات - صور احترافية */
-        .services { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        /* أزرار الطاقة */
+        .btn-power {
+            background: var(--gold); color: #000; padding: 22px 50px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            border: none; cursor: pointer; transition: var(--transition);
+            display: block; width: 100%; font-size: 1rem;
+        }
+        .btn-power:hover { background: #fff; transform: translateY(-5px); box-shadow: 0 20px 40px var(--gold-glow); }
+
+        /* شبكة الخدمات الحية */
+        .live-services { padding: 120px 20px; max-width: 1300px; margin: 0 auto; }
         .service-card {
-            background: var(--navy-light); border-radius: 15px; overflow: hidden;
-            border: 1px solid var(--border); transition: 0.4s;
+            position: relative; height: 500px; overflow: hidden; border-radius: 4px;
+            margin-bottom: 30px; border: 1px solid var(--border); transition: var(--transition);
         }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-        .service-card img { width: 100%; height: 200px; object-fit: cover; }
-        .service-info { padding: 25px; }
-        .service-info h3 { margin-bottom: 10px; color: var(--gold); font-size: 1.4rem; }
-        .service-info p { color: var(--gray); font-size: 0.9rem; }
+        .service-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .service-card:hover img { transform: scale(1.1); filter: brightness(0.5); }
+        .service-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
 
-        /* قسم "لماذا نحن" - ثقة عالية */
-        .trust-section { background: var(--navy-light); padding: 60px 20px; text-align: center; }
-        .trust-icons {
-            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
-            opacity: 0.6; filter: grayscale(1);
+        /* مؤشر الحالة "مباشر" */
+        .live-indicator {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(0, 255, 100, 0.1); color: #00ff64;
+            padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;
+            margin-bottom: 20px; text-transform: uppercase;
         }
-        .trust-icons img { height: 40px; }
+        .dot { width: 8px; height: 8px; background: #00ff64; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* فوتر */
-        footer { padding: 50px 20px; border-top: 1px solid var(--border); text-align: center; }
+        footer { padding: 80px 20px; border-top: 1px solid var(--border); text-align: center; }
 
-        /* شاشة التحميل الوهمية */
-        #loader {
-            display: none; text-align: center; margin-top: 20px; color: var(--gold);
-        }
-
-        /* تحسينات الجوال */
-        @media (max-width: 600px) {
-            .hero-content h1 { font-size: 2.8rem; }
-            .btn { width: 100%; margin: 10px 0; }
-            .btn-outline { margin-left: 0; }
-            .grid-inputs { grid-template-columns: 1fr; }
+        /* استجابة الجوال */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .scanner-card { padding: 25px; }
+            .plate-input { font-size: 1.8rem; }
+            .nav-container { padding: 0 15px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="nav-inner">
-            <a href="#" class="logo">UTBY<span>SNABB</span></a>
-            <a href="tel:0720040936" style="color: var(--gold); font-weight: 800; text-decoration: none;"><i class="fa fa-phone"></i></a>
+        <div class="nav-container">
+            <a href="#" class="logo">UTBY<span>ELITE</span></a>
+            <div class="live-indicator"><div class="dot"></div> 4 Spots left today</div>
         </div>
     </header>
 
     <section class="hero">
+        <div class="hero-bg"></div>
         <div class="hero-content">
-            <span style="color: var(--gold); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem;">GÖTEBORG PRECISION AUTOMOTIVE</span>
-            <h1>Din bil förtjänar det bästa.</h1>
-            <p>Auktoriserad service och reparationer med originaldelar. Vi bevarar din nybilsgaranti.</p>
-            <div>
-                <a href="#booking" class="btn btn-gold">Boka tid nu</a>
-                <a href="#services" class="btn btn-outline">Våra tjänster</a>
-            </div>
+            <p style="color: var(--gold); font-weight: 700; letter-spacing: 5px; margin-bottom: 10px;">GÖTEBORG AUTOMOTIVE MASTERPIECE</p>
+            <h1>BEYOND<br><span>SERVICE.</span></h1>
+            <p style="max-width: 600px; margin: 0 auto; color: #a0aec0; font-size: 1.1rem;">Vi skapar framtidens bilägande genom digital precision och passionerat hantverk.</p>
         </div>
     </section>
 
-    <div class="trust-section">
-        <div class="trust-icons">
-            <img src="https://mrf.se/wp-content/uploads/2018/03/mrf-logotyp-liggande-farg-300x122.png" alt="MRF">
-            <img src="https://godkandbilverkstad.se/wp-content/uploads/2018/05/GBV_logotyp_farg_webb.png" alt="GBV">
-            <div style="font-weight: 900; color: #fff;">TOP RATED GOOGLE</div>
-        </div>
-    </div>
-
-    <section class="booking-box" id="booking">
-        <div class="booking-card">
-            <div class="grid-inputs">
-                <div class="input-item">
-                    <label>Registreringsnummer</label>
-                    <input type="text" placeholder="ABC 123" class="plate-input" id="regNo">
+    <section class="scanner-section" id="boka">
+        <div class="scanner-card">
+            <div class="plate-container">
+                <div class="scan-line" id="scanLine"></div>
+                <input type="text" id="regInput" placeholder="PLATE ID" maxlength="6" class="plate-input">
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                <div style="padding: 15px; border: 1px solid var(--border); text-align: center; background: rgba(255,255,255,0.02);">
+                    <p style="font-size: 0.6rem; color: var(--gold); font-weight: 800;">STATUS</p>
+                    <p style="font-weight: 700;">READY TO SCAN</p>
                 </div>
-                <div class="input-item">
-                    <label>Välj Tjänst</label>
-                    <select>
-                        <option>Originalservice</option>
-                        <option>Bromsbyte</option>
-                        <option>Däckservice</option>
-                        <option>Felsökning</option>
-                    </select>
-                </div>
-                <div class="input-item">
-                    <label>Välj Datum</label>
-                    <input type="date" id="bookingDate">
+                <div style="padding: 15px; border: 1px solid var(--border); text-align: center; background: rgba(255,255,255,0.02);">
+                    <p style="font-size: 0.6rem; color: var(--gold); font-weight: 800;">ESTIMATED TIME</p>
+                    <p style="font-weight: 700;">45 MIN SERVICE</p>
                 </div>
             </div>
-            <button class="btn btn-gold" style="width: 100%;" onclick="startBooking()">Sök tillgängliga tider</button>
-            
-            <div id="loader">
-                <i class="fas fa-circle-notch fa-spin"></i> Söker i systemet...
-            </div>
+            <button class="btn-power" onclick="startScanner()">Börja Digital Diagnos</button>
         </div>
     </section>
 
-    <section class="services" id="services">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h2 style="font-size: 2.5rem; font-weight: 800;">Våra Expertisområden</h2>
-            <p style="color: var(--gray);">Professionell hantering av alla bilmärken</p>
+    <section class="live-services">
+        <div style="margin-bottom: 60px;">
+            <h2 style="font-size: 3rem; font-weight: 800; letter-spacing: -2px;">PRECISION<br>SPECIALTIES.</h2>
         </div>
         
-        <div class="service-grid">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800" alt="Motor">
-                <div class="service-info">
-                    <h3>Motor & Diagnos</h3>
-                    <p>Vi använder fabriksdiagnostik för att hitta och åtgärda fel snabbt و korrekt.</p>
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1000" alt="Motor">
+                <div class="service-overlay">
+                    <h3>Engine Masterclass</h3>
+                    <p style="color: #a0aec0;">Avancerad felsökning med originalmjukvara från tillverkaren.</p>
                 </div>
             </div>
             <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1549317336-206569e8475c?q=80&w=800" alt="Bromsar">
-                <div class="service-info">
-                    <h3>Bromssystem</h3>
-                    <p>Säkerheten först. Vi byter bromsar och vätskor med högsta precision.</p>
-                </div>
-            </div>
-            <div class="service-card">
-                <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800" alt="Däck">
-                <div class="service-info">
-                    <h3>Däckhotell</h3>
-                    <p>Låt oss ta hand om dina däck. Förvaring, tvätt och skifte i ett paket.</p>
+                <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1000" alt="Car">
+                <div class="service-overlay">
+                    <h3>Performance Tuning</h3>
+                    <p style="color: #a0aec0;">Optimering av bromsar، hjulupphängning och drivlina.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="logo">UTBY<span>SNABB</span></div>
-        <p style="margin: 20px 0; color: var(--gray);">Vagnmakaregatan 2, 415 72 Göteborg</p>
-        <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
-            <i class="fab fa-facebook"></i>
+        <h2 style="font-family: 'Space Grotesk'; font-weight: 700;">UTBY<span>SNABB</span></h2>
+        <p style="margin: 20px 0; color: #4a5568;">Vagnmakaregatan 2, 415 72 Göteborg</p>
+        <div style="display: flex; justify-content: center; gap: 30px; font-size: 1.2rem; color: var(--gold);">
             <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-linkedin-in"></i>
         </div>
-        <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.5;">© 2026 Utby Snabb Bilservice AB. Design by Hussein.</p>
+        <p style="margin-top: 50px; font-size: 0.6rem; opacity: 0.3; letter-spacing: 2px;">© 2026 ELITE AUTOMOTIVE GROUP. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        // إعداد التاريخ الأدنى ليكون اليوم
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('bookingDate').min = today;
-        });
+        // أنيميشن الماسح الضوئي
+        function startScanner() {
+            const input = document.getElementById('regInput').value;
+            const line = document.getElementById('scanLine');
+            const btn = event.target;
 
-        // محاكاة عملية البحث عن موعد
-        function startBooking() {
-            const reg = document.getElementById('regNo').value;
-            const loader = document.getElementById('loader');
-            
-            if(reg.length < 3) {
-                alert("Vänligen ange ett giltigt registreringsnummer.");
+            if(input.length < 3) {
+                alert("Please enter a valid Plate ID");
                 return;
             }
 
-            loader.style.display = "block";
-            
+            line.style.display = "block";
+            btn.innerHTML = "<i class='fas fa-sync fa-spin'></i> AI SCANNING SYSTEM...";
+            btn.style.background = "#fff";
+
             setTimeout(() => {
-                loader.innerHTML = "<span style='color: #2ecc71;'><i class='fa fa-check'></i> Vi hittade 3 lediga tider för din bil!</span>";
+                line.style.display = "none";
+                btn.innerHTML = "<i class='fas fa-check'></i> VEHICLE IDENTIFIED";
+                btn.style.background = "#00ff64";
+                
                 setTimeout(() => {
-                    alert("Tack! Vi har tagit emot din förfrågan för
+                    alert("Systemet hittade din bil! Vi har skickat en bokningslänk till din telefon.");
+                    btn.innerHTML = "Börja Digital Diagnos";
+                    btn.style.background = "var(--gold)";
+                }, 1000);
+            }, 3000);
+        }
+
+        // تأثير الظهور عند التمرير
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(50px)";
+            card.style.transition = "all 1s ease-out";
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
