@@ -3,307 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meknomen | Din bil. Vårt ansvar. – Bilverkstad & Reservdelar</title>
+    <title>Meknomen | Pro-Grade Automotive Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --dark-blue: #0A1F44;
-            --yellow: #FFD100;
-            --yellow-hover: #e6bc00;
-            --white: #FFFFFF;
-            --light-gray: #F5F7FA;
-            --border: #E2E8F0;
-            --success: #2ECC71;
-            --text-main: #1A202C;
-            --text-muted: #4A5568;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Official-Style Palette */
+            --mek-navy: #061226;
+            --mek-blue-light: #0d1f3d;
+            --mek-yellow: #ffcc00;
+            --mek-yellow-glow: rgba(255, 204, 0, 0.4);
+            --mek-white: #ffffff;
+            --mek-gray-100: #f8f9fa;
+            --mek-gray-400: #adb5bd;
+            --mek-gray-800: #212529;
+            --mek-success: #00c853;
+            
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.5; overflow-x: hidden; }
-        
-        /* --- UTILITIES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: var(--transition); border: none; text-decoration: none; font-size: 1rem; }
-        .btn-yellow { background: var(--yellow); color: var(--dark-blue); }
-        .btn-yellow:hover { background: var(--yellow-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 209, 0, 0.4); }
-        .btn-outline { border: 2px solid var(--white); color: var(--white); background: transparent; }
-        .btn-outline:hover { background: var(--white); color: var(--dark-blue); }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body { 
+            font-family: var(--font-main); 
+            background: var(--mek-white); 
+            color: var(--mek-navy); 
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ADVANCED BACKGROUND & TEXTURES --- */
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(at 0% 0%, rgba(13, 31, 61, 0.05) 0%, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 204, 0, 0.02) 0%, transparent 50%);
+            z-index: -1;
+        }
 
         /* --- NAVIGATION --- */
-        nav { background: var(--white); height: 80px; display: flex; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-        .nav-content { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--dark-blue); letter-spacing: -1px; }
-        .logo span { color: var(--yellow); background: var(--dark-blue); padding: 2px 6px; border-radius: 4px; margin-left: 2px; }
-        .nav-links { display: flex; gap: 24px; font-weight: 600; font-size: 0.9rem; }
-        
-        /* --- HERO SECTION --- */
-        .hero { position: relative; background: var(--dark-blue); color: var(--white); padding: 100px 0 140px; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(45deg, rgba(10,31,68,1) 30%, rgba(255,209,0,0.1) 100%); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; max-width: 600px; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
-        .hero p { font-size: 1.25rem; opacity: 0.9; margin-bottom: 32px; }
-        .hero-ctas { display: flex; gap: 16px; margin-bottom: 40px; }
-
-        .trust-line { display: flex; gap: 20px; flex-wrap: wrap; opacity: 0.8; font-size: 0.9rem; font-weight: 600; }
-        .trust-line span i { color: var(--yellow); margin-right: 6px; }
-
-        /* --- QUICK BOOKING MODULE --- */
-        .booking-module { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); margin-top: -60px; position: relative; z-index: 10; border: 1px solid var(--border); }
-        .booking-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; align-items: end; }
-        .input-group { display: flex; flex-direction: column; gap: 8px; }
-        .input-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
-        .input-group input, .input-group select { padding: 12px; border: 2px solid var(--border); border-radius: 6px; font-size: 1rem; font-weight: 600; outline: none; transition: border-color 0.2s; }
-        .input-group input:focus { border-color: var(--dark-blue); }
-        .reg-input { background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%230A1F44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 95% center; text-transform: uppercase; }
-
-        /* --- SERVICES SECTION --- */
-        .section { padding: 80px 0; }
-        .section-gray { background: var(--light-gray); }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--dark-blue); }
-        
-        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-        .service-card { background: var(--white); padding: 32px; border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); position: relative; overflow: hidden; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--yellow); }
-        .service-card i { font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 20px; display: block; }
-        .service-card h3 { margin-bottom: 12px; font-weight: 700; }
-        .service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
-        .service-card .link { color: var(--dark-blue); font-weight: 700; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
-
-        /* --- BRAND GRID --- */
-        .brand-grid { display: flex; justify-content: space-between; align-items: center; opacity: 0.4; filter: grayscale(1); flex-wrap: wrap; gap: 20px; margin-top: 40px; }
-        .brand-grid span { font-weight: 900; font-size: 1.2rem; }
-
-        /* --- TESTIMONIALS --- */
-        .testimonial-card { background: var(--dark-blue); color: var(--white); padding: 40px; border-radius: 16px; text-align: center; }
-        .stars { color: var(--yellow); margin-bottom: 15px; }
-
-        /* --- MOBILE STICKY CTA --- */
-        .sticky-mobile { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--white); padding: 12px 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); display: none; z-index: 1001; }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 2.5rem; }
-            .booking-grid { grid-template-columns: 1fr 1fr; }
-            .booking-grid .btn { grid-column: span 2; }
-            .nav-links { display: none; }
+        header {
+            background: rgba(6, 18, 38, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        @media (max-width: 768px) {
-            .hero { padding: 60px 0 100px; text-align: center; }
-            .hero-ctas { justify-content: center; flex-direction: column; }
-            .booking-grid { grid-template-columns: 1fr; }
-            .booking-grid .btn { grid-column: span 1; }
-            .sticky-mobile { display: block; }
-            .section { padding: 50px 0; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.8rem; color: var(--mek-white); letter-spacing: -1.5px; text-transform: uppercase; }
+        .logo span { color: var(--mek-yellow); }
+        
+        .nav-menu { display: flex; gap: 35px; }
+        .nav-menu a { color: var(--mek-white); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition-smooth); opacity: 0.8; }
+        .nav-menu a:hover { opacity: 1; color: var(--mek-yellow); }
+
+        /* --- HERO SECTION --- */
+        .hero { 
+            padding: 180px 0 120px; 
+            background: var(--mek-navy); 
+            color: var(--mek-white);
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        .hero-img-overlay {
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
+            opacity: 0.3;
+            mask-image: linear-gradient(to left, black, transparent);
+        }
+        .hero-title { font-size: 4.5rem; line-height: 1; font-weight: 800; margin-bottom: 25px; letter-spacing: -3px; }
+        .hero-subtitle { font-size: 1.4rem; color: var(--mek-gray-400); margin-bottom: 45px; max-width: 600px; font-weight: 300; }
+
+        /* --- ADVANCED BOOKING ENGINE --- */
+        .booking-engine {
+            max-width: 1100px; margin: -80px auto 0;
+            background: var(--mek-white);
+            border-radius: 2px; /* Scandinavian Sharpness */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            display: grid; grid-template-columns: 1.2fr 1fr 1fr auto;
+            position: relative; z-index: 10; overflow: hidden;
+            border-bottom: 4px solid var(--mek-yellow);
+        }
+        .input-block { padding: 25px; border-right: 1px solid var(--mek-gray-100); display: flex; flex-direction: column; gap: 10px; }
+        .input-block label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--mek-gray-400); letter-spacing: 1px; }
+        
+        .plate-box { background: #fff; border: 2px solid var(--mek-gray-800); border-radius: 4px; display: flex; height: 55px; }
+        .plate-eu { background: #003399; width: 35px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 0.6rem; font-weight: bold; }
+        .plate-box input { border: none; flex: 1; text-align: center; font-family: var(--font-mono); font-size: 1.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+
+        .service-select { border: 1px solid var(--mek-gray-100); padding: 15px; font-size: 1rem; font-weight: 600; appearance: none; cursor: pointer; }
+        
+        .btn-submit { background: var(--mek-yellow); border: none; padding: 0 45px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: var(--transition-smooth); }
+        .btn-submit:hover { background: var(--mek-navy); color: #fff; }
+
+        /* --- TRUST & PARTNER BAR --- */
+        .trust-bar { padding: 40px 0; border-bottom: 1px solid var(--mek-gray-100); }
+        .trust-grid { display: flex; justify-content: space-between; align-items: center; opacity: 0.6; filter: grayscale(1); }
+        .trust-grid img { height: 35px; }
+
+        /* --- SERVICES: THE "PRECISION" GRID --- */
+        .services-section { padding: 100px 0; }
+        .section-tag { color: var(--mek-yellow); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .section-head { font-size: 3rem; font-weight: 800; margin-bottom: 60px; }
+
+        .service-card {
+            background: #fff; padding: 50px; border: 1px solid #eee; transition: var(--transition-smooth);
+            display: flex; flex-direction: column; gap: 20px; position: relative;
+        }
+        .service-card:hover { border-color: var(--mek-navy); transform: translateY(-10px); }
+        .service-card .icon { font-size: 2.5rem; color: var(--mek-navy); }
+        .service-card h3 { font-size: 1.5rem; font-weight: 700; }
+        .service-card p { color: var(--mek-gray-400); line-height: 1.6; }
+        .service-card .price-tag { position: absolute; top: 30px; right: 30px; font-weight: 800; font-size: 0.8rem; background: var(--mek-gray-100); padding: 5px 10px; }
+
+        /* --- AI ANALYTICS SIMULATION --- */
+        .ai-scanner { background: var(--mek-navy); padding: 100px 0; color: #fff; overflow: hidden; }
+        .scanner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .scan-visual { position: relative; border: 1px solid rgba(255,255,255,0.1); padding: 40px; }
+        .scan-line { position: absolute; width: 100%; height: 2px; background: var(--mek-yellow); top: 0; left: 0; animation: scanMove 3s infinite linear; box-shadow: 0 0 15px var(--mek-yellow); }
+        
+        @keyframes scanMove { 0% { top: 0%; } 100% { top: 100%; } }
+
+        /* --- FOOTER & COMPLIANCE --- */
+        footer { background: #030a16; padding: 100px 0 50px; color: var(--mek-white); }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 80px; }
+        .footer-col h4 { font-weight: 800; margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; color: var(--mek-gray-400); font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
+        .footer-col li:hover { color: var(--mek-yellow); }
+
+        /* --- MOBILE ADAPTATION --- */
+        @media (max-width: 992px) {
+            .hero-title { font-size: 3rem; }
+            .booking-engine { grid-template-columns: 1fr; margin-top: -40px; }
+            .input-block { border-right: none; border-bottom: 1px solid #eee; }
+            .scanner-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="sticky-mobile">
-        <a href="#booking" class="btn btn-yellow" style="width: 100%;">Boka tid direkt</a>
-    </div>
+    <div class="bg-mesh"></div>
 
-    <nav>
-        <div class="container nav-content">
+    <header>
+        <div class="nav-container">
             <a href="#" class="logo">MEK<span>NOMEN</span></a>
-            <div class="nav-links">
-                <a href="#">BOKA TID</a>
+            <nav class="nav-menu">
+                <a href="#">BILVERKSTAD</a>
                 <a href="#">BUTIK</a>
                 <a href="#">TJÄNSTER</a>
                 <a href="#">SERVICEAVTAL</a>
-                <a href="#">KUNDKLUBB</a>
+            </nav>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <span style="color: #fff; font-weight: 700; font-size: 0.9rem;"><i class="fa fa-phone" style="color: var(--mek-yellow);"></i> 0771-72 00 00</span>
+                <a href="#" class="btn-submit" style="padding: 10px 20px; border-radius: 4px; text-decoration: none; color: #000; font-size: 0.8rem;">LOGGA IN</a>
             </div>
-            <a href="tel:0771-720000" class="btn btn-yellow" style="padding: 8px 16px; font-size: 0.8rem;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i>0771-72 00 00</a>
         </div>
-    </nav>
+    </header>
 
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Din bil.<br>Vårt ansvar.</h1>
-                <p>Service, reparation och diagnos för alla bilmärken – snabbt, tryggt och prisvärt.</p>
-                <div class="hero-ctas">
-                    <a href="#booking" class="btn btn-yellow">Boka tid direkt</a>
-                    <a href="#" class="btn btn-outline">Hitta din verkstad</a>
-                </div>
-                <div class="trust-line">
-                    <span><i class="fa-solid fa-circle-check"></i>Upp till 5 års garanti</span>
-                    <span><i class="fa-solid fa-circle-check"></i>Prisgaranti</span>
-                    <span><i class="fa-solid fa-circle-check"></i>Certifierade mekaniker</span>
+        <div class="hero-img-overlay"></div>
+        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+            <div style="position: relative; z-index: 5;">
+                <span class="section-tag" style="color: var(--mek-yellow);">Scandinavia's Leading Auto Authority</span>
+                <h1 class="hero-title">Originalservice.<br>Originalgaranti.</h1>
+                <p class="hero-subtitle">Vi kombinerar teknisk expertis med digital precision. Serva din bil hos oss och behåll din nybilsgaranti – alltid med 5 års garanti på reservdelar.</p>
+                <div style="display: flex; gap: 30px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa fa-award" style="color: var(--mek-yellow); font-size: 1.5rem;"></i>
+                        <span>Godkänd Bilverkstad</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa fa-shield-halved" style="color: var(--mek-yellow); font-size: 1.5rem;"></i>
+                        <span>MobilitetsGaranti</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="container" id="booking">
-        <div class="booking-module">
-            <div class="booking-grid">
-                <div class="input-group">
-                    <label>Registreringsnummer</label>
-                    <input type="text" placeholder="ABC 123" class="reg-input" id="regField">
+    <section class="booking-engine">
+        <div class="input-block">
+            <label>Registreringsnummer</label>
+            <div class="plate-box">
+                <div class="plate-eu">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" width="18" alt="EU">
+                    <span>S</span>
                 </div>
-                <div class="input-group">
-                    <label>Postnummer</label>
-                    <input type="text" placeholder="123 45">
-                </div>
-                <div class="input-group">
-                    <label>Vad behöver göras?</label>
-                    <select>
-                        <option>Originalservice</option>
-                        <option>Däckskifte</option>
-                        <option>Bromsbyte</option>
-                        <option>Felsökning</option>
-                        <option>Batteritest</option>
-                    </select>
-                </div>
-                <button class="btn btn-yellow" onclick="handleBooking()" id="bookingBtn">Boka på 30 sek</button>
+                <input type="text" placeholder="ABC 123" id="mainPlate">
             </div>
-            <div id="carResponse" style="display:none; margin-top: 15px; color: var(--success); font-weight: 700; font-size: 0.9rem;">
-                <i class="fa-solid fa-car"></i> Identifierad: Volvo V60 (2021) - Vi har lediga tider i ditt område!
-            </div>
+        </div>
+        <div class="input-block">
+            <label>Din Tjänst</label>
+            <select class="service-select">
+                <option>Originalservice</option>
+                <option>Bas-service (Äldre bilar)</option>
+                <option>Bromskontroll & Byte</option>
+                <option>Felsökning / Diagnos</option>
+            </select>
+        </div>
+        <div class="input-block">
+            <label>Hitta Verkstad</label>
+            <input type="text" placeholder="Postnummer eller Stad" style="padding: 15px; border: 1px solid #eee; font-weight: 600;">
+        </div>
+        <button class="btn-submit" onclick="animateBooking()">BOKA TID <i class="fa fa-chevron-right" style="margin-left: 10px;"></i></button>
+    </section>
+
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 60px 40px;">
+        <div class="trust-grid">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968311.png" alt="Klarna">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Swish_Logo.svg" alt="Swish" style="height: 25px;">
+            <span style="font-weight: 900; color: #000; font-size: 1.2rem;">KONTROLLERA DIN BIL</span>
+            <span style="font-weight: 900; color: #000; font-size: 1.2rem;">TRYGG HANTERING</span>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/BankID_logo.svg/1200px-BankID_logo.svg.png" style="height: 20px;">
         </div>
     </div>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Våra tjänster</h2>
-                <p>Vi servar alla bilmärken med bibehållen nybilsgaranti.</p>
-            </div>
-            <div class="service-grid">
-                <div class="service-card">
-                    <i class="fa-solid fa-wrench"></i>
-                    <h3>Bilservice</h3>
-                    <p>Enligt tillverkarens schema. Din nybilsgaranti fortsätter att gälla.</p>
-                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
+    <section class="ai-scanner">
+        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+            <div class="scanner-grid">
+                <div>
+                    <span class="section-tag">Next-Gen Diagnostics</span>
+                    <h2 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 30px;">Teknik som ser vad ögat missar.</h2>
+                    <p style="color: var(--mek-gray-400); font-size: 1.2rem; margin-bottom: 40px;">Vi använder fabriksnivå-diagnostik för att kommunicera direkt med din bils mjukvara. Varje service inkluderar en fullständig digital hälsokontroll.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 20px;">
+                            <h4 style="color: var(--mek-yellow);">01. ECU Scan</h4>
+                            <p style="font-size: 0.8rem; opacity: 0.7;">Deep reading of control units.</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 20px;">
+                            <h4 style="color: var(--mek-yellow);">02. Battery Health</h4>
+                            <p style="font-size: 0.8rem; opacity: 0.7;">State-of-charge analytics.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-circle-notch"></i>
-                    <h3>Däckservice</h3>
-                    <p>Skifte, balansering och däckhotell. Vi ser till att du rullar säkert.</p>
-                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-car-battery"></i>
-                    <h3>Batteritest</h3>
-                    <p>Vi testar ditt batteri kostnadsfritt och byter vid behov.</p>
-                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-magnifying-glass-chart"></i>
-                    <h3>Felsökning</h3>
-                    <p>Modern diagnosutrustning för att hitta felen snabbt och exakt.</p>
-                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
+                <div class="scan-visual">
+                    <div class="scan-line"></div>
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=800" style="width: 100%; opacity: 0.5;" alt="Car Engine">
+                    <div style="position: absolute; bottom: 60px; left: 60px; background: var(--mek-yellow); color: #000; padding: 10px; font-family: var(--font-mono); font-weight: 800;">
+                        SYSTEM STATUS: OPTIMIZING...
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+            <span class="section-tag">Våra expertområden</span>
+            <h2 class="section-head">Professionell bilvård.<br>Inga genvägar.</h2>
             
-            <div class="brand-grid">
-                <span>VOLVO</span>
-                <span>AUDI</span>
-                <span>BMW</span>
-                <span>TESLA</span>
-                <span>VW</span>
-                <span>TOYOTA</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-gray">
-        <div class="container">
-            <div class="service-card" style="display: flex; flex-direction: row; align-items: center; gap: 40px; padding: 60px; border-left: 10px solid var(--yellow);">
-                <div style="flex: 2;">
-                    <span style="background: var(--dark-blue); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; margin-bottom: 15px; display: inline-block;">MEKNOMEN SERVICEAVTAL</span>
-                    <h2 style="font-size: 2rem; margin-bottom: 15px; color: var(--dark-blue);">Fast månadskostnad – inga överraskningar</h2>
-                    <p style="margin-bottom: 25px;">Få full kontroll på dina bilkostnader. All service ingår, inklusive assistansförsäkring och fri väghjälp.</p>
-                    <ul style="list-style: none; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: 600;">
-                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> All service ingår</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Fri assistans</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Räntefri delbetalning</li>
-                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Fast pris</li>
-                    </ul>
-                    <a href="#" class="btn btn-yellow">Se ditt pris</a>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="service-card">
+                    <div class="price-tag">FR. 2.495 KR</div>
+                    <i class="fa fa-microchip icon"></i>
+                    <h3>Originalservice</h3>
+                    <p>Vi följer tillverkarens specifika serviceprotokoll till punkt och pricka. Din digitala servicebok uppdateras direkt.</p>
                 </div>
-                <div style="flex: 1; text-align: center;" class="nav-links">
-                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 8rem; color: var(--border);"></i>
+                <div class="service-card">
+                    <div class="price-tag">FAST PRIS</div>
+                    <i class="fa fa-gauge-high icon"></i>
+                    <h3>Bromsservice</h3>
+                    <p>Högkvalitativa bromskomponenter testade för nordiskt klimat. Säkerhet är vår högsta prioritet.</p>
+                </div>
+                <div class="service-card">
+                    <div class="price-tag">FR. 1.200 KR</div>
+                    <i class="fa fa-snowflake icon"></i>
+                    <h3>AC-Service</h3>
+                    <p>Kontroll, provtryckning och påfyllning. Vi ser till att ditt klimatsystem fungerar optimalt året runt.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background: var(--dark-blue); color: var(--white); text-align: center;">
-        <div class="container">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Redo att ta hand om din bil?</h2>
-            <p style="margin-bottom: 40px; opacity: 0.8;">Boka din tid idag. Det tar mindre än 1 minut och vi garanterar högsta kvalitet.</p>
-            <a href="#booking" class="btn btn-yellow" style="padding: 20px 60px; font-size: 1.2rem;">Boka nu</a>
-        </div>
-    </section>
-
-    <footer style="background: var(--light-gray); padding: 80px 0 40px; border-top: 1px solid var(--border);">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
-                <div>
-                    <h4 style="margin-bottom: 20px;">Om Meknomen</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Vi gör ditt billiv enklare genom att erbjuda ett brett och lättillgängligt utbud av prisvärda och innovativa lösningar.</p>
+    <footer>
+        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">MEK<span>NOMEN</span></a>
+                    <p style="margin-top: 20px; color: var(--mek-gray-400);">Vi gör billivet enklare genom kvalitet och tillgänglighet. Över 450 verkstäder i Norden.</p>
                 </div>
-                <div>
-                    <h4 style="margin-bottom: 20px;">Tjänster</h4>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 2;">
-                        <li><a href="#" style="color: var(--text-muted);">Bilservice</a></li>
-                        <li><a href="#" style="color: var(--text-muted);">Däck</a></li>
-                        <li><a href="#" style="color: var(--text-muted);">Assistans</a></li>
-                        <li><a href="#" style="color: var(--text-muted);">Serviceavtal</a></li>
+                <div class="footer-col">
+                    <h4>TJÄNSTER</h4>
+                    <ul>
+                        <li>Boka Bilservice</li>
+                        <li>Däck & Hjul</li>
+                        <li>Reparationer</li>
+                        <li>Assistansförsäkring</li>
                     </ul>
                 </div>
-                <div>
-                    <h4 style="margin-bottom: 20px;">Kontakt</h4>
-                    <ul style="list-style: none; font-size: 0.85rem; line-height: 2; color: var(--text-muted);">
-                        <li><i class="fa-solid fa-phone"></i> 0771-72 00 00</li>
-                        <li><i class="fa-solid fa-envelope"></i> kundservice@meknomen.se</li>
-                        <li>Mån-Fre: 07:00 - 20:00</li>
+                <div class="footer-col">
+                    <h4>OM OSS</h4>
+                    <ul>
+                        <li>Hållbarhet</li>
+                        <li>Press & Nyheter</li>
+                        <li>Jobba hos oss</li>
+                        <li>Investerare</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>KUNDSERVICE</h4>
+                    <ul>
+                        <li>Frågor & Svar</li>
+                        <li>Bokningsvillkor</li>
+                        <li>Integritetspolicy</li>
+                        <li>Kontakta oss</li>
                     </ul>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 40px; font-size: 0.8rem; color: var(--text-muted);">
-                &copy; 2026 Meknomen V2 Concept. Alla rättigheter förbehållna.
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--mek-gray-400);">
+                <p>&copy; 2026 Meknomen Group AB. All rights reserved.</p>
+                <div style="display: flex; gap: 20px;">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        function handleBooking() {
-            const btn = document.getElementById('bookingBtn');
-            const response = document.getElementById('carResponse');
-            const reg = document.getElementById('regField').value;
-
-            if(reg.length > 3) {
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Söker...';
-                setTimeout(() => {
-                    btn.innerHTML = 'Gå vidare';
-                    response.style.display = 'block';
-                    btn.style.background = '#2ECC71';
-                    btn.style.color = '#fff';
-                }, 1200);
-            } else {
-                alert('Vänligen ange ett giltigt registreringsnummer.');
+        function animateBooking() {
+            const btn = document.querySelector('.btn-submit');
+            const plate = document.getElementById('mainPlate').value;
+            
+            if(!plate) {
+                alert("Ange ett registreringsnummer för att starta diagnostiken.");
+                return;
             }
+
+            btn.innerHTML = '<i class="fa fa-sync fa-spin"></i> ANALYSERAR SYSTEM...';
+            btn.style.background = '#00c853';
+            btn.style.color = '#fff';
+
+            setTimeout(() => {
+                btn.innerHTML = 'HITTADE 3 VERKSTÄDER <i class="fa fa-arrow-right"></i>';
+                btn.style.background = '#ffcc00';
+                btn.style.color = '#000';
+            }, 2000);
         }
 
-        // Simple parallax-like fade in
+        // Parallax Effect for Hero Image
         window.addEventListener('scroll', () => {
-            const cards = document.querySelectorAll('.service-card');
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if(cardTop < window.innerHeight - 100) {
-                    card.style.opacity = '1';
-                }
-            });
+            const scrolled = window.pageYOffset;
+            const overlay = document.querySelector('.hero-img-overlay');
+            overlay.style.transform = `translateY(${scrolled * 0.3}px)`;
         });
     </script>
 </body>
