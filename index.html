@@ -1,709 +1,310 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NordicAuto | Premium Car Service</title>
-    
+    <title>Meknomen | Din bil. Vårt ansvar. – Bilverkstad & Reservdelar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        /* --- DESIGN SYSTEM & VARIABLES --- */
         :root {
-            --bg-dark: #0b0d10;
-            --bg-surface: #161a20;
-            --bg-surface-light: #222730;
-            --text-main: #f4f4f5;
-            --text-muted: #9ca3af;
-            --accent-orange: #ff5722;
-            --accent-orange-hover: #e64a19;
-            --accent-blue: #0ea5e9;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --font-main: 'Inter', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --dark-blue: #0A1F44;
+            --yellow: #FFD100;
+            --yellow-hover: #e6bc00;
+            --white: #FFFFFF;
+            --light-gray: #F5F7FA;
+            --border: #E2E8F0;
+            --success: #2ECC71;
+            --text-main: #1A202C;
+            --text-muted: #4A5568;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- RESET & TYPOGRAPHY --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background: var(--white); line-height: 1.5; overflow-x: hidden; }
         
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        img { max-width: 100%; height: auto; display: block; }
-
-        /* --- LAYOUT & UTILITIES --- */
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-        .section-padding { padding: 100px 0; }
-        .text-center { text-align: center; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        
-        /* --- COMPONENTS --- */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 32px;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-        }
-        
-        .btn-primary {
-            background-color: var(--accent-orange);
-            color: #fff;
-            box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--accent-orange-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--bg-surface-light);
-            border-color: var(--text-muted);
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 6px 12px;
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent-blue);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: var(--transition); border: none; text-decoration: none; font-size: 1rem; }
+        .btn-yellow { background: var(--yellow); color: var(--dark-blue); }
+        .btn-yellow:hover { background: var(--yellow-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 209, 0, 0.4); }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); background: transparent; }
+        .btn-outline:hover { background: var(--white); color: var(--dark-blue); }
 
         /* --- NAVIGATION --- */
-        header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 0;
-            z-index: 1000;
-            transition: var(--transition);
-            border-bottom: 1px solid transparent;
-        }
+        nav { background: var(--white); height: 80px; display: flex; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+        .nav-content { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--dark-blue); letter-spacing: -1px; }
+        .logo span { color: var(--yellow); background: var(--dark-blue); padding: 2px 6px; border-radius: 4px; margin-left: 2px; }
+        .nav-links { display: flex; gap: 24px; font-weight: 600; font-size: 0.9rem; }
         
-        header.scrolled {
-            background-color: rgba(11, 13, 16, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 0;
-        }
-
-        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; display: flex; align-items: center; gap: 8px;}
-        .logo i { color: var(--accent-orange); }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); transition: var(--transition); }
-        .nav-links a:hover { color: var(--text-main); }
-        
-        .nav-actions { display: flex; align-items: center; gap: 20px; }
-        .phone-link { font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .phone-link i { color: var(--accent-blue); }
-
         /* --- HERO SECTION --- */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            overflow: hidden;
-        }
+        .hero { position: relative; background: var(--dark-blue); color: var(--white); padding: 100px 0 140px; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(45deg, rgba(10,31,68,1) 30%, rgba(255,209,0,0.1) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 600px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero p { font-size: 1.25rem; opacity: 0.9; margin-bottom: 32px; }
+        .hero-ctas { display: flex; gap: 16px; margin-bottom: 40px; }
 
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 70% 50%, rgba(22, 26, 32, 1) 0%, rgba(11, 13, 16, 1) 70%);
-            z-index: -2;
-        }
+        .trust-line { display: flex; gap: 20px; flex-wrap: wrap; opacity: 0.8; font-size: 0.9rem; font-weight: 600; }
+        .trust-line span i { color: var(--yellow); margin-right: 6px; }
 
-        .hero-glow {
-            position: absolute;
-            top: 50%; right: 10%;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 8s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1) translateY(0); }
-            100% { transform: scale(1.1) translateY(-20px); }
-        }
-
-        .hero-content { max-width: 650px; }
-        .hero h1 { font-size: 4.5rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; max-width: 550px; }
-
-        /* License Plate Input - Conversion Element */
-        .plate-lookup {
-            background: var(--bg-surface);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .eu-plate {
-            display: flex;
-            flex: 1;
-            background: #fff;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 2px solid #ccc;
-        }
-
-        .eu-strip {
-            background: #003399;
-            width: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 0;
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: bold;
-        }
-        .eu-strip img { width: 20px; }
-
-        .eu-plate input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-align: center;
-            text-transform: uppercase;
-            color: #000;
-            letter-spacing: 2px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .trust-badges { display: flex; gap: 20px; align-items: center; margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 20px;}
-        .trust-badge { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-muted); }
-        .trust-badge i { color: #facc15; } /* Gold star */
+        /* --- QUICK BOOKING MODULE --- */
+        .booking-module { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); margin-top: -60px; position: relative; z-index: 10; border: 1px solid var(--border); }
+        .booking-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; align-items: end; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+        .input-group input, .input-group select { padding: 12px; border: 2px solid var(--border); border-radius: 6px; font-size: 1rem; font-weight: 600; outline: none; transition: border-color 0.2s; }
+        .input-group input:focus { border-color: var(--dark-blue); }
+        .reg-input { background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%230A1F44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 95% center; text-transform: uppercase; }
 
         /* --- SERVICES SECTION --- */
-        .services { background-color: var(--bg-dark); }
-        .section-header { margin-bottom: 60px; max-width: 600px; }
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
-
-        .service-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            padding: 40px 30px;
-            border-radius: 12px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--accent-orange);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.15); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-        .service-card:hover::before { transform: scaleX(1); }
-
-        .service-icon {
-            width: 60px; height: 60px;
-            background: var(--bg-surface-light);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--text-main);
-            margin-bottom: 25px;
-        }
-
-        .service-card h3 { font-size: 1.3rem; margin-bottom: 15px; }
-        .service-card p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem; }
-        .service-card a { font-weight: 600; color: var(--accent-blue); display: flex; align-items: center; gap: 5px; font-size: 0.9rem; }
-        .service-card a:hover i { transform: translateX(5px); }
-        .service-card a i { transition: transform 0.2s ease; }
-
-        /* --- HOW IT WORKS --- */
-        .how-it-works { background-color: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-        .step-card { text-align: center; position: relative; }
+        .section { padding: 80px 0; }
+        .section-gray { background: var(--light-gray); }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; font-weight: 800; color: var(--dark-blue); }
         
-        .step-number {
-            width: 50px; height: 50px;
-            background: var(--accent-blue);
-            color: #fff;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; font-weight: 700;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 2;
-        }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+        .service-card { background: var(--white); padding: 32px; border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); position: relative; overflow: hidden; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--yellow); }
+        .service-card i { font-size: 2.5rem; color: var(--dark-blue); margin-bottom: 20px; display: block; }
+        .service-card h3 { margin-bottom: 12px; font-weight: 700; }
+        .service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+        .service-card .link { color: var(--dark-blue); font-weight: 700; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
 
-        .step-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
-        .step-card p { color: var(--text-muted); font-size: 0.95rem; }
+        /* --- BRAND GRID --- */
+        .brand-grid { display: flex; justify-content: space-between; align-items: center; opacity: 0.4; filter: grayscale(1); flex-wrap: wrap; gap: 20px; margin-top: 40px; }
+        .brand-grid span { font-weight: 900; font-size: 1.2rem; }
 
-        /* --- ESTIMATOR (JS INTERACTION) --- */
-        .estimator-section { padding: 80px 0; background: linear-gradient(to bottom, var(--bg-dark), var(--bg-surface)); }
-        .estimator-box {
-            background: var(--bg-surface-light);
-            padding: 50px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        #estimator-result {
-            display: none;
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-color);
-            animation: fadeIn 0.5s ease;
-        }
-
-        .loader {
-            display: none;
-            width: 40px; height: 40px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--accent-orange);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 30px auto;
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- TRUST / WHY US --- */
-        .why-us { padding: 100px 0; }
-        .feature { display: flex; gap: 20px; }
-        .feature i { font-size: 2rem; color: var(--accent-orange); }
-        .feature h4 { margin-bottom: 5px; font-size: 1.1rem; }
-        .feature p { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* --- URGENCY / FINAL CTA --- */
-        .urgency-section {
-            background: linear-gradient(45deg, var(--bg-surface), #1a100c);
-            border-top: 1px solid rgba(255, 87, 34, 0.2);
-            border-bottom: 1px solid rgba(255, 87, 34, 0.2);
-            text-align: center;
-        }
-        .urgency-text { color: var(--accent-orange); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
-
-        /* --- FOOTER --- */
-        footer { background: #07080a; padding: 80px 0 30px; border-top: 1px solid var(--border-color); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 60px; }
-        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col ul li a { color: var(--text-muted); transition: var(--transition); font-size: 0.95rem; }
-        .footer-col ul li a:hover { color: var(--text-main); }
-        .footer-bottom { text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); padding-top: 30px; }
-
-        /* --- SCROLL ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* --- TESTIMONIALS --- */
+        .testimonial-card { background: var(--dark-blue); color: var(--white); padding: 40px; border-radius: 16px; text-align: center; }
+        .stars { color: var(--yellow); margin-bottom: 15px; }
 
         /* --- MOBILE STICKY CTA --- */
-        .mobile-sticky-cta {
-            display: none;
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: var(--bg-surface-light);
-            padding: 15px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-            z-index: 999;
-            border-top: 1px solid var(--border-color);
-        }
+        .sticky-mobile { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--white); padding: 12px 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); display: none; z-index: 1001; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-            .hero h1 { font-size: 3.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .booking-grid { grid-template-columns: 1fr 1fr; }
+            .booking-grid .btn { grid-column: span 2; }
+            .nav-links { display: none; }
         }
-
         @media (max-width: 768px) {
-            .nav-links, .nav-actions .phone-link { display: none; }
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-            .hero { padding-top: 120px; text-align: center; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { margin: 0 auto 30px; }
-            .plate-lookup { flex-direction: column; margin: 0 auto 30px; }
-            .trust-badges { justify-content: center; flex-wrap: wrap; }
-            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            
-            /* Show mobile CTA */
-            .mobile-sticky-cta { display: block; }
-            body { padding-bottom: 80px; } /* Prevent footer overlap */
+            .hero { padding: 60px 0 100px; text-align: center; }
+            .hero-ctas { justify-content: center; flex-direction: column; }
+            .booking-grid { grid-template-columns: 1fr; }
+            .booking-grid .btn { grid-column: span 1; }
+            .sticky-mobile { display: block; }
+            .section { padding: 50px 0; }
         }
     </style>
 </head>
 <body>
 
-    <header id="header">
-        <div class="container nav-wrapper">
-            <div class="logo">
-                <i class="fa-solid fa-shield-halved"></i> NordicAuto
+    <div class="sticky-mobile">
+        <a href="#booking" class="btn btn-yellow" style="width: 100%;">Boka tid direkt</a>
+    </div>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">MEK<span>NOMEN</span></a>
+            <div class="nav-links">
+                <a href="#">BOKA TID</a>
+                <a href="#">BUTIK</a>
+                <a href="#">TJÄNSTER</a>
+                <a href="#">SERVICEAVTAL</a>
+                <a href="#">KUNDKLUBB</a>
             </div>
-            <nav class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#how-it-works">How it Works</a>
-                <a href="#estimator">Pricing</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="tel:+460000000" class="phone-link"><i class="fa-solid fa-phone"></i> 08-123 45 67</a>
-                <a href="#book" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Book Now</a>
-            </div>
+            <a href="tel:0771-720000" class="btn btn-yellow" style="padding: 8px 16px; font-size: 0.8rem;"><i class="fa-solid fa-phone" style="margin-right: 8px;"></i>0771-72 00 00</a>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-glow"></div>
-        
         <div class="container">
-            <div class="hero-content reveal">
-                <span class="tag">Premium Automotive Care</span>
-                <h1>Professional Car Service You Can Trust.</h1>
-                <p>Transparent pricing, certified mechanics, and zero hidden fees. Enter your registration number to instantly check availability and prices.</p>
-                
-                <form id="hero-form" class="plate-lookup">
-                    <div class="eu-plate">
-                        <div class="eu-strip">
-                            <span>S</span>
-                        </div>
-                        <input type="text" id="hero-reg-input" placeholder="ABC 123" maxlength="7" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Get Price</button>
-                </form>
-
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                        <span>4.8/5 (10,000+ Reviews)</span>
-                    </div>
-                    <div class="trust-badge">
-                        <i class="fa-solid fa-check-circle" style="color: var(--accent-blue);"></i>
-                        <span>Certified Workshop</span>
-                    </div>
+            <div class="hero-content">
+                <h1>Din bil.<br>Vårt ansvar.</h1>
+                <p>Service, reparation och diagnos för alla bilmärken – snabbt, tryggt och prisvärt.</p>
+                <div class="hero-ctas">
+                    <a href="#booking" class="btn btn-yellow">Boka tid direkt</a>
+                    <a href="#" class="btn btn-outline">Hitta din verkstad</a>
+                </div>
+                <div class="trust-line">
+                    <span><i class="fa-solid fa-circle-check"></i>Upp till 5 års garanti</span>
+                    <span><i class="fa-solid fa-circle-check"></i>Prisgaranti</span>
+                    <span><i class="fa-solid fa-circle-check"></i>Certifierade mekaniker</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="services section-padding">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Our Services</h2>
-                <p>Complete care for your vehicle. We handle everything from standard maintenance to complex diagnostics using manufacturer-approved parts.</p>
+    <div class="container" id="booking">
+        <div class="booking-module">
+            <div class="booking-grid">
+                <div class="input-group">
+                    <label>Registreringsnummer</label>
+                    <input type="text" placeholder="ABC 123" class="reg-input" id="regField">
+                </div>
+                <div class="input-group">
+                    <label>Postnummer</label>
+                    <input type="text" placeholder="123 45">
+                </div>
+                <div class="input-group">
+                    <label>Vad behöver göras?</label>
+                    <select>
+                        <option>Originalservice</option>
+                        <option>Däckskifte</option>
+                        <option>Bromsbyte</option>
+                        <option>Felsökning</option>
+                        <option>Batteritest</option>
+                    </select>
+                </div>
+                <button class="btn btn-yellow" onclick="handleBooking()" id="bookingBtn">Boka på 30 sek</button>
             </div>
-
-            <div class="grid-3">
-                <div class="service-card reveal">
-                    <div class="service-icon"><i class="fa-solid fa-oil-can"></i></div>
-                    <h3>Original Car Service</h3>
-                    <p>Maintain your factory warranty. Full inspection, oil change, and filter replacements according to manufacturer protocols.</p>
-                    <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><i class="fa-solid fa-laptop-medical"></i></div>
-                    <h3>OBD Diagnostics</h3>
-                    <p>Warning light on? We use advanced diagnostic software to read error codes and pinpoint exactly what your car needs.</p>
-                    <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card reveal">
-                    <div class="service-icon"><i class="fa-solid fa-car-burst"></i></div>
-                    <h3>Brake Repair</h3>
-                    <p>Safety first. Complete inspection and replacement of brake pads, discs, and fluid to ensure maximum stopping power.</p>
-                    <a href="#">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
+            <div id="carResponse" style="display:none; margin-top: 15px; color: var(--success); font-weight: 700; font-size: 0.9rem;">
+                <i class="fa-solid fa-car"></i> Identifierad: Volvo V60 (2021) - Vi har lediga tider i ditt område!
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="how-it-works" class="how-it-works section-padding">
+    <section class="section">
         <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 60px;">
-                <h2>Back on the road in 3 steps</h2>
+            <div class="section-title">
+                <h2>Våra tjänster</h2>
+                <p>Vi servar alla bilmärken med bibehållen nybilsgaranti.</p>
             </div>
-            
-            <div class="grid-3">
-                <div class="step-card reveal">
-                    <div class="step-number">1</div>
-                    <h3>Book Online</h3>
-                    <p>Enter your reg number, select your service, and choose a time that fits your schedule. No upfront payment required.</p>
+            <div class="service-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-wrench"></i>
+                    <h3>Bilservice</h3>
+                    <p>Enligt tillverkarens schema. Din nybilsgaranti fortsätter att gälla.</p>
+                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
-                <div class="step-card reveal">
-                    <div class="step-number">2</div>
-                    <h3>We Inspect & Repair</h3>
-                    <p>Drop off your keys. Our certified mechanics handle the rest using premium, manufacturer-approved components.</p>
+                <div class="service-card">
+                    <i class="fa-solid fa-circle-notch"></i>
+                    <h3>Däckservice</h3>
+                    <p>Skifte, balansering och däckhotell. Vi ser till att du rullar säkert.</p>
+                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
-                <div class="step-card reveal">
-                    <div class="step-number">3</div>
-                    <h3>Drive Safely</h3>
-                    <p>You get a detailed protocol of the work done, a stamp in your digital service book, and 12-months warranty.</p>
+                <div class="service-card">
+                    <i class="fa-solid fa-car-battery"></i>
+                    <h3>Batteritest</h3>
+                    <p>Vi testar ditt batteri kostnadsfritt och byter vid behov.</p>
+                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="estimator" class="estimator-section">
-        <div class="container">
-            <div class="estimator-box reveal">
-                <h2>Instant Price Estimator</h2>
-                <p style="color: var(--text-muted); margin-top: 10px; margin-bottom: 30px;">Get a transparent starting price for your specific vehicle model.</p>
-                
-                <form id="estimator-form" class="plate-lookup" style="margin: 0 auto;">
-                    <div class="eu-plate">
-                        <div class="eu-strip"><span>S</span></div>
-                        <input type="text" id="calc-reg-input" placeholder="REG NR" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Calculate</button>
-                </form>
-
-                <div class="loader" id="estimator-loader"></div>
-
-                <div id="estimator-result">
-                    <h3 id="vehicle-name" style="color: var(--accent-blue); margin-bottom: 10px;">Volvo V60 (2018)</h3>
-                    <p style="font-size: 1.1rem; margin-bottom: 20px;">Estimated Original Service starting from:</p>
-                    <div style="font-size: 3rem; font-weight: 800; margin-bottom: 20px;">€ 249<span style="font-size: 1rem; color: var(--text-muted);">*</span></div>
-                    <button class="btn btn-primary" style="width: 100%; max-width: 300px;">Secure This Price & Book</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="why-us section-padding">
-        <div class="container">
-            <div class="grid-4">
-                <div class="feature reveal">
-                    <i class="fa-solid fa-stopwatch"></i>
-                    <div>
-                        <h4>Fast Turnaround</h4>
-                        <p>Most standard services are completed the same day.</p>
-                    </div>
-                </div>
-                <div class="feature reveal">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                    <div>
-                        <h4>Transparent Pricing</h4>
-                        <p>No unexpected costs. You approve any extra work first.</p>
-                    </div>
-                </div>
-                <div class="feature reveal">
-                    <i class="fa-solid fa-award"></i>
-                    <div>
-                        <h4>Valid Warranty</h4>
-                        <p>We stamp your service book, keeping your factory warranty intact.</p>
-                    </div>
-                </div>
-                <div class="feature reveal">
-                    <i class="fa-solid fa-users-gear"></i>
-                    <div>
-                        <h4>Certified Experts</h4>
-                        <p>Continuous training on the latest EV and hybrid technologies.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="urgency-section section-padding">
-        <div class="container reveal">
-            <span class="urgency-text"><i class="fa-solid fa-clock"></i> High Demand</span>
-            <h2 style="font-size: 3rem; margin-bottom: 20px;">Available times are filling fast.</h2>
-            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px;">Book today to secure your slot for this week.</p>
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn btn-primary" style="font-size: 1.1rem; padding: 18px 40px;">Find a Time</button>
-                <button class="btn btn-secondary" style="font-size: 1.1rem; padding: 18px 40px;"><i class="fa-solid fa-phone"></i> Call Workshop</button>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo" style="margin-bottom: 20px;">
-                        <i class="fa-solid fa-shield-halved"></i> NordicAuto
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; max-width: 300px;">
-                        Premium automotive care without the dealership price tag. Certified, transparent, and fast.
-                    </p>
-                    <div style="display: flex; gap: 15px;">
-                        <i class="fa-brands fa-facebook" style="font-size: 1.5rem; color: var(--text-muted); cursor: pointer;"></i>
-                        <i class="fa-brands fa-instagram" style="font-size: 1.5rem; color: var(--text-muted); cursor: pointer;"></i>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#">Original Car Service</a></li>
-                        <li><a href="#">Brake Replacement</a></li>
-                        <li><a href="#">AC Service</a></li>
-                        <li><a href="#">Wheel Alignment</a></li>
-                        <li><a href="#">EV / Hybrid Service</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Contact & Hours</h4>
-                    <ul style="color: var(--text-muted); font-size: 0.95rem;">
-                        <li style="color: #fff;"><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Industrigatan 14, Stockholm</li>
-                        <li style="color: #fff;"><i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> bokning@nordicauto.se</li>
-                        <li style="margin-top: 15px;">Mon - Fri: 07:00 - 18:00</li>
-                        <li>Sat - Sun: Closed</li>
-                    </ul>
+                <div class="service-card">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h3>Felsökning</h3>
+                    <p>Modern diagnosutrustning för att hitta felen snabbt och exakt.</p>
+                    <a href="#" class="link">Läs mer <i class="fa-solid fa-chevron-right"></i></a>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                &copy; 2026 NordicAuto AB. All rights reserved.
+            <div class="brand-grid">
+                <span>VOLVO</span>
+                <span>AUDI</span>
+                <span>BMW</span>
+                <span>TESLA</span>
+                <span>VW</span>
+                <span>TOYOTA</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-gray">
+        <div class="container">
+            <div class="service-card" style="display: flex; flex-direction: row; align-items: center; gap: 40px; padding: 60px; border-left: 10px solid var(--yellow);">
+                <div style="flex: 2;">
+                    <span style="background: var(--dark-blue); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; margin-bottom: 15px; display: inline-block;">MEKNOMEN SERVICEAVTAL</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 15px; color: var(--dark-blue);">Fast månadskostnad – inga överraskningar</h2>
+                    <p style="margin-bottom: 25px;">Få full kontroll på dina bilkostnader. All service ingår, inklusive assistansförsäkring och fri väghjälp.</p>
+                    <ul style="list-style: none; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-weight: 600;">
+                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> All service ingår</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Fri assistans</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Räntefri delbetalning</li>
+                        <li><i class="fa-solid fa-check" style="color: var(--success);"></i> Fast pris</li>
+                    </ul>
+                    <a href="#" class="btn btn-yellow">Se ditt pris</a>
+                </div>
+                <div style="flex: 1; text-align: center;" class="nav-links">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 8rem; color: var(--border);"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--dark-blue); color: var(--white); text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Redo att ta hand om din bil?</h2>
+            <p style="margin-bottom: 40px; opacity: 0.8;">Boka din tid idag. Det tar mindre än 1 minut och vi garanterar högsta kvalitet.</p>
+            <a href="#booking" class="btn btn-yellow" style="padding: 20px 60px; font-size: 1.2rem;">Boka nu</a>
+        </div>
+    </section>
+
+    <footer style="background: var(--light-gray); padding: 80px 0 40px; border-top: 1px solid var(--border);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                <div>
+                    <h4 style="margin-bottom: 20px;">Om Meknomen</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Vi gör ditt billiv enklare genom att erbjuda ett brett och lättillgängligt utbud av prisvärda och innovativa lösningar.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px;">Tjänster</h4>
+                    <ul style="list-style: none; font-size: 0.85rem; line-height: 2;">
+                        <li><a href="#" style="color: var(--text-muted);">Bilservice</a></li>
+                        <li><a href="#" style="color: var(--text-muted);">Däck</a></li>
+                        <li><a href="#" style="color: var(--text-muted);">Assistans</a></li>
+                        <li><a href="#" style="color: var(--text-muted);">Serviceavtal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px;">Kontakt</h4>
+                    <ul style="list-style: none; font-size: 0.85rem; line-height: 2; color: var(--text-muted);">
+                        <li><i class="fa-solid fa-phone"></i> 0771-72 00 00</li>
+                        <li><i class="fa-solid fa-envelope"></i> kundservice@meknomen.se</li>
+                        <li>Mån-Fre: 07:00 - 20:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 40px; font-size: 0.8rem; color: var(--text-muted);">
+                &copy; 2026 Meknomen V2 Concept. Alla rättigheter förbehållna.
             </div>
         </div>
     </footer>
 
-    <div class="mobile-sticky-cta">
-        <button class="btn btn-primary" style="width: 100%;">Book Service Now</button>
-    </div>
-
     <script>
-        // --- Sticky Header ---
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        function handleBooking() {
+            const btn = document.getElementById('bookingBtn');
+            const response = document.getElementById('carResponse');
+            const reg = document.getElementById('regField').value;
+
+            if(reg.length > 3) {
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Söker...';
+                setTimeout(() => {
+                    btn.innerHTML = 'Gå vidare';
+                    response.style.display = 'block';
+                    btn.style.background = '#2ECC71';
+                    btn.style.color = '#fff';
+                }, 1200);
             } else {
-                header.classList.remove('scrolled');
+                alert('Vänligen ange ett giltigt registreringsnummer.');
             }
-        });
+        }
 
-        // --- Scroll Reveal Animations ---
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
+        // Simple parallax-like fade in
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if(cardTop < window.innerHeight - 100) {
+                    card.style.opacity = '1';
                 }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Trigger on load
-
-        // --- License Plate Input Formatting ---
-        const formatPlate = (e) => {
-            let val = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-            if (val.length > 3) {
-                val = val.slice(0, 3) + ' ' + val.slice(3, 6);
-            }
-            e.target.value = val;
-        };
-        document.getElementById('hero-reg-input').addEventListener('input', formatPlate);
-        document.getElementById('calc-reg-input').addEventListener('input', formatPlate);
-
-        // --- Sync Inputs ---
-        document.getElementById('hero-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const val = document.getElementById('hero-reg-input').value;
-            document.getElementById('calc-reg-input').value = val;
-            document.getElementById('estimator').scrollIntoView({ behavior: 'smooth' });
-            simulateLookup(val);
+            });
         });
-
-        document.getElementById('estimator-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const val = document.getElementById('calc-reg-input').value;
-            simulateLookup(val);
-        });
-
-        // --- Interactive Estimator Simulation ---
-        function simulateLookup(regNumber) {
-            if(!regNumber || regNumber.length < 5) return;
-            
-            const form = document.getElementById('estimator-form');
-            const loader = document.getElementById('estimator-loader');
-            const result = document.getElementById('estimator-result');
-            const carName = document.getElementById('vehicle-name');
-
-            form.style.display = 'none';
-            loader.style.display = 'block';
-            result.style.display = 'none';
-
-            // Simulate API Call delay
-            setTimeout(() => {
-                loader.style.display = 'none';
-                form.style.display = 'flex';
-                
-                // Randomize a car name based on input to make it feel "real"
-                const cars = ["Volvo XC60 (2019)", "Volkswagen Golf (2020)", "Audi A4 (2018)", "Tesla Model 3 (2021)", "BMW 320i (2017)"];
-                const randomCar = cars[Math.floor(Math.random() * cars.length)];
-                
-                carName.innerText = randomCar + " - Reg: " + regNumber;
-                result.style.display = 'block';
-            }, 1500);
-        }
     </script>
 </body>
 </html>
